@@ -8,5 +8,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('lotto/', lotto),
     path('mychart/', mychart),
+    path('mychart/<int:bid>/', mychart),
     path('', homepage),
 ]

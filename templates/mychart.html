@@ -6,6 +6,19 @@
     <h1>我的統計圖表</h1>
 {% endblock %}
 {% block content %}
+{% for item in data %}
+   {{ item.branch }}, {{item.income_year}}-{{item.income_month}}:{{ item.income }}<br>
+{% endfor %}
+    <button class="btn btn-sm">
+        <a href="/mychart/0/">所有分店</a>
+    </button>
+    <button class="btn btn-sm">
+        <a href="/mychart/1/">左營店</a>
+    </button>
+    <button class="btn btn-sm">
+        <a href="/mychart/2/">楠梓店</a>
+    </button>
+
 <center>
 <table width=800>
   <tr><td>
@@ -18,10 +31,19 @@ var ctx = document.getElementById('myChart').getContext('2d');
 var myChart = new Chart(ctx, {
     type: 'bar',
     data: {
-        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+        labels: [
+{% for item in data %}
+    '{{item.branch}}',
+{% endfor %}
+        ],
         datasets: [{
-            label: '# of Votes',
-            data: [12, 19, 3, 5, 2, 3],
+            label: '各分店營收情形',
+            data: [
+{% for item in data %}
+    '{{item.income}}',
+{% endfor %}
+
+            ],
             backgroundColor: [
                 'rgba(255, 99, 132, 0.2)',
                 'rgba(54, 162, 235, 0.2)',
