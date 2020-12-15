@@ -15,10 +15,33 @@ def homepage(request):
 
 def mychart(request, bid=0):
     now = datetime.now()
+
+    stores = Branch.objects.all()
+
     if bid==0:
         data = StoreIncome.objects.all()
     else:
         data = StoreIncome.objects.filter(branch=bid)
+    title = "各分店營收情形"
+    return render(request, "mychart.html", locals())
+
+def chart(request, year=0, month=0):
+    now = datetime.now()
+    stores = Branch.objects.all()
+
+    if year==0:
+        data = StoreIncome.objects.all()
+    else:
+        data = StoreIncome.objects.filter(income_year=year)
+        if month>0:
+            data = data.filter(income_month=month)
+
+    if year>0 and month>0:
+        title = "{}年{}月各分店營收情形".format(year, month)
+    elif year>0:
+        title = "{}年各分店營收情形".format(year)
+    else:
+        title = "各分店營收情形"
     return render(request, "mychart.html", locals())
 
 def showpost(request, slug):
