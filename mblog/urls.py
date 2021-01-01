@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.urls import path
-from mainsite.views import homepage, lotto, showpost, mychart, chart
+from mainsite.views import homepage, lotto, showpost, mychart, chart, gchart
 
 
 urlpatterns = [
@@ -9,6 +9,7 @@ urlpatterns = [
     path('lotto/', lotto),
     path('mychart/', mychart),
     path('mychart/<int:bid>/', mychart),
+    path('gchart/', gchart),
     path('chartbydate/<int:year>/<int:month>/', chart),
     path('chartbydate/<int:year>/', chart),
     path('', homepage),

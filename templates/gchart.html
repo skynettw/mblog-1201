@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% block title %}
+我的統計圖表
+{% endblock %}
+{% block titlemessage %}
+    <h1>Google Chart測試</h1>
+{% endblock %}
+{% block content %}
+<script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+
+        var data = google.visualization.arrayToDataTable([
+          ['項目', '每天時數'],
+          ['工作',     11],
+          ['吃',      2],
+          ['通勤',  2],
+          ['休閒活動', 2],
+          ['睡覺',    7]
+        ]);
+
+        var options = {
+          title: '我的每日活動'
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+        chart.draw(data, options);
+      }
+
+      google.charts.load('current', {
+        'packages':['geochart'],
+        // Note: you will need to get a mapsApiKey for your project.
+        // See: https://developers.google.com/chart/interactive/docs/basic_load_libs#load-settings
+        'mapsApiKey': 'AIzaSyC1D_M3GZXR-ogRglMOeDyr7RMOqDeZjUY'
+      });
+      google.charts.setOnLoadCallback(drawRegionsMap);
+
+      function drawRegionsMap() {
+        var data = google.visualization.arrayToDataTable([
+          ['Country', 'Popularity'],
+          ['Germany', 200],
+          ['The United States', 300],
+          ['Brazil', 400],
+          ['Canada', 500],
+          ['France', 600],
+          ['RU', 700]
+        ]);
+
+        var options = {
+            domain: 'TW',
+        };
+
+        var chart = new google.visualization.GeoChart(document.getElementById('regions_div'));
+
+        chart.draw(data, options);
+      }
+    </script>      
+    </script>
+    <div id="piechart" style="width: 900px; height: 500px;"></div>
+    <div id="regions_div" style="width: 900px; height: 500px;"></div>
+{% endblock %}

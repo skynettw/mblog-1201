@@ -13,6 +13,10 @@ def homepage(request):
     now = datetime.now()
     return render(request, "index.html", locals())
 
+def gchart(request):
+    now = datetime.now()
+    return render(request, "gchart.html", locals())
+
 def mychart(request, bid=0):
     now = datetime.now()
 
